@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/showsFragment">
+
+    <fragment
+        android:id="@+id/showsFragment"
+        android:name="Views.ShowsFragment"
+        android:label="fragment_shows"
+        tools:layout="@layout/fragment_shows" />
+    <fragment
+        android:id="@+id/moviesFragment"
+        android:name="Views.MoviesFragment"
+        android:label="fragment_movies"
+        tools:layout="@layout/fragment_movies" />
+    <fragment
+        android:id="@+id/discoverFragment"
+        android:name="Views.Discover.DiscoverFragment"
+        android:label="fragment_discover"
+        tools:layout="@layout/fragment_discover" >
+        <action
+            android:id="@+id/action_discoverFragment_to_discoverSearchFragment"
+            app:destination="@id/discoverSearchFragment" />
+        <action
+            android:id="@+id/action_discoverFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="Views.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/discoverSearchFragment"
+        android:name="Views.Discover.DiscoverSearchFragment"
+        android:label="fragment_discover_search"
+        tools:layout="@layout/fragment_discover_search" >
+        <action
+            android:id="@+id/action_discoverSearchFragment_to_discoverFragment"
+            app:destination="@id/discoverFragment" />
+        <action
+            android:id="@+id/action_discoverSearchFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="Views.Discover.DetailsFragment"
+        android:label="fragment_details"
+        tools:layout="@layout/fragment_details" >
+        <action
+            android:id="@+id/action_detailsFragment_to_discoverFragment"
+            app:destination="@id/discoverFragment" />
+        <argument
+            android:name="Details"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
+</navigation>
