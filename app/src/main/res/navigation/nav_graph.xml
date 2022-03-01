@@ -9,12 +9,20 @@
         android:id="@+id/showsFragment"
         android:name="Views.ShowsFragment"
         android:label="fragment_shows"
-        tools:layout="@layout/fragment_shows" />
+        tools:layout="@layout/fragment_shows" >
+        <action
+            android:id="@+id/action_showsFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/moviesFragment"
         android:name="Views.MoviesFragment"
         android:label="fragment_movies"
-        tools:layout="@layout/fragment_movies" />
+        tools:layout="@layout/fragment_movies" >
+        <action
+            android:id="@+id/action_moviesFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/discoverFragment"
         android:name="Views.Discover.DiscoverFragment"
@@ -49,9 +57,6 @@
         android:name="Views.Discover.DetailsFragment"
         android:label="fragment_details"
         tools:layout="@layout/fragment_details" >
-        <action
-            android:id="@+id/action_detailsFragment_to_discoverFragment"
-            app:destination="@id/discoverFragment" />
         <argument
             android:name="Details"
             app:argType="string"

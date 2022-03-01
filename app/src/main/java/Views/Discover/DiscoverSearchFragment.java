@@ -27,13 +27,17 @@ import android.widget.TextView;
 import com.example.tvtimeclone.R;
 import com.example.tvtimeclone.databinding.FragmentDiscoverBinding;
 import com.example.tvtimeclone.databinding.FragmentDiscoverSearchBinding;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
 
 import Adapter.MoviesAdapter;
+import Adapter.addClickCallback;
 import Adapter.itemClickCallback;
 import Models.DetailsModel.Results;
 import ViewModels.DiscoverSearchViewModel;
+import repository.FirebaseAuthRepo;
+import repository.FirebaseRepo;
 
 public class DiscoverSearchFragment extends Fragment {
 
@@ -42,10 +46,19 @@ public class DiscoverSearchFragment extends Fragment {
     private DiscoverSearchViewModel viewModel;
     private NavController navController;
     private boolean isShow = false;
-
+    private FirebaseAuthRepo authRepo;
+    private FirebaseRepo firebaseRepo;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        binding = FragmentDiscoverSearchBinding.inflate(inflater, container, false);
+        return binding.getRoot();
+
     }
 
     @Override
@@ -53,14 +66,20 @@ public class DiscoverSearchFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         navController = Navigation.findNavController(view);
-
+        authRepo = new FirebaseAuthRepo(getContext());
+        authRepo.getFirebaseUser().observe(getViewLifecycleOwner(), new Observer<FirebaseUser>() {
+            @Override
+            public void onChanged(FirebaseUser firebaseUser) {
+                firebaseRepo = new FirebaseRepo(firebaseUser);
+            }
+        });
 
         viewModel = new ViewModelProvider(DiscoverSearchFragment.this).get(DiscoverSearchViewModel.class);
         binding.switchBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) {
-                    isShow = b;
+            public void onCheckedChanged(CompoundButton compoundButton, boolean show) {
+                if (show) {
+                    isShow = true;
                 }
 
             }
@@ -89,13 +108,7 @@ public class DiscoverSearchFragment extends Fragment {
         });
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        binding = FragmentDiscoverSearchBinding.inflate(inflater, container, false);
-        return binding.getRoot();
 
-    }
 
     private void getMovies() {
         String name = binding.searchEditText.getText().toString();
@@ -107,9 +120,16 @@ public class DiscoverSearchFragment extends Fragment {
                         searchAdapter = new MoviesAdapter(getContext(), results, new itemClickCallback() {
                             @Override
                             public void onItemClicked(Results details) {
-                                DiscoverSearchFragmentDirections.ActionDiscoverSearchFragmentToDetailsFragment action = DiscoverSearchFragmentDirections.actionDiscoverSearchFragmentToDetailsFragment(details.toString());
-                                // navController.navigate(R.id.action_discoverSearchFragment_to_detailsFragment);
+                                details.isShow = isShow;
+                                DiscoverSearchFragmentDirections.ActionDiscoverSearchFragmentToDetailsFragment action =
+                                        DiscoverSearchFragmentDirections.actionDiscoverSearchFragmentToDetailsFragment(DiscoverFragment.convertToByteString(details));
                                 navController.navigate(action);
+                            }
+                        }, new addClickCallback() {
+                            @Override
+                            public void onAddButtonClicked(Results movies) {
+
+                                    firebaseRepo.setWatchLaterMovies(movies);
                             }
                         });
 
@@ -131,9 +151,17 @@ public class DiscoverSearchFragment extends Fragment {
                 searchAdapter = new MoviesAdapter(getContext(), results, new itemClickCallback() {
                     @Override
                     public void onItemClicked(Results details) {
-                        DiscoverSearchFragmentDirections.ActionDiscoverSearchFragmentToDetailsFragment action = DiscoverSearchFragmentDirections.actionDiscoverSearchFragmentToDetailsFragment(details.toString());
+                        details.isShow = isShow;
+
+                        DiscoverSearchFragmentDirections.ActionDiscoverSearchFragmentToDetailsFragment action =
+                                DiscoverSearchFragmentDirections.actionDiscoverSearchFragmentToDetailsFragment(DiscoverFragment.convertToByteString(details));
 
                         navController.navigate(action);
+                    }
+                }, new addClickCallback() {
+                    @Override
+                    public void onAddButtonClicked(Results movies) {
+                        firebaseRepo.setWatchLaterShows(movies);
                     }
                 });
                 binding.searchProgress.setVisibility(View.GONE);

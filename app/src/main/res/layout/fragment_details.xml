@@ -48,6 +48,14 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <Button
+        android:id="@+id/add_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_baseline_add_box_24"
+        android:text="Add to Watched List"
+        android:textSize="20sp"
+        android:layout_gravity="bottom"/>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -65,55 +73,53 @@
                 android:layout_height="wrap_content"
                 android:lineSpacingExtra="8sp"
                 android:padding="16dp"
-                android:textColor="@color/orange"
                 android:text="Movie Info-"
-                android:textSize="20sp"
-                />
+                android:textColor="@color/orange"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/release_year"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Release Year: "
-                android:textSize="20dp"
                 android:lineSpacingExtra="8sp"
                 android:padding="16dp"
-                />
+                android:text="Release Year: "
+                android:textSize="20dp" />
 
             <TextView
                 android:id="@+id/popularity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Popularity: "
                 android:lineSpacingExtra="8sp"
                 android:padding="16dp"
+                android:text="Popularity: "
                 android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/content_rating"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Content Rating: "
                 android:lineSpacingExtra="8sp"
                 android:padding="16dp"
+                android:text="Content Rating: "
                 android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Description: "
                 android:lineSpacingExtra="8sp"
                 android:padding="16dp"
+                android:text="Description: "
                 android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/movie_length"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Movie Length: "
                 android:lineSpacingExtra="8sp"
                 android:padding="16dp"
+                android:text="Movie Length: "
                 android:textSize="20sp" />
 
 

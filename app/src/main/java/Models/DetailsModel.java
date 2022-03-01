@@ -1,7 +1,8 @@
 package Models;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+
+
+import androidx.annotation.Keep;
 
 import java.io.Serializable;
 import java.util.List;
@@ -9,8 +10,7 @@ import java.util.List;
 public class DetailsModel implements Serializable {
     private Results results;
 
-    protected DetailsModel(Parcel in) {
-    }
+    public DetailsModel(){}
 
 
     public Results getResults() {
@@ -19,21 +19,12 @@ public class DetailsModel implements Serializable {
 
 
     public static class Results implements Serializable {
-        @Override
-        public String toString() {
-            return
-                    imdb_id + "rishabh" +
-                            year + "rishabh" +
-                            image_url + "rishabh" +
-                            release + "rishabh" +
-                            rating + "rishabh" + title + "rishabh" +
-                            popularity + "rishabh" +
-                            movie_length + "rishabh" +
-                            content_rating + "rishabh" +
-                            description
 
-                    ;
-        }
+        @Keep
+        public  Results(){}
+
+
+        public   boolean isShow;
 
         private List<Keywords> keywords;
 
@@ -53,7 +44,7 @@ public class DetailsModel implements Serializable {
 
         private String banner;
 
-        private More_like_this more_like_this;
+
 
         private String title;
 
@@ -116,12 +107,6 @@ public class DetailsModel implements Serializable {
             return this.banner;
         }
 
-
-        public More_like_this getMore_like_this() {
-            return this.more_like_this;
-        }
-
-
         public String getTitle() {
             return this.title;
         }
@@ -161,8 +146,78 @@ public class DetailsModel implements Serializable {
             return this.content_rating;
         }
 
+        public void setKeywords(List<Keywords> keywords) {
+            this.keywords = keywords;
+        }
+
+        public void setImdb_id(String imdb_id) {
+            this.imdb_id = imdb_id;
+        }
+
+        public void setYear(Integer year) {
+            this.year = year;
+        }
+
+        public void setImage_url(String image_url) {
+            this.image_url = image_url;
+        }
+
+        public void setRelease(String release) {
+            this.release = release;
+        }
+
+        public void setRating(Double rating) {
+            this.rating = rating;
+        }
+
+        public void setDescription(String description) {
+            this.description = description;
+        }
+
+        public void setCreated_at(String created_at) {
+            this.created_at = created_at;
+        }
+
+        public void setBanner(String banner) {
+            this.banner = banner;
+        }
+
+
+
+        public void setTitle(String title) {
+            this.title = title;
+        }
+
+        public void setType(String type) {
+            this.type = type;
+        }
+
+        public void setTrailer(String trailer) {
+            this.trailer = trailer;
+        }
+
+        public void setGen(List<Gen> gen) {
+            this.gen = gen;
+        }
+
+        public void setPlot(String plot) {
+            this.plot = plot;
+        }
+
+        public void setPopularity(Integer popularity) {
+            this.popularity = popularity;
+        }
+
+        public void setMovie_length(Integer movie_length) {
+            this.movie_length = movie_length;
+        }
+
+        public void setContent_rating(String content_rating) {
+            this.content_rating = content_rating;
+        }
 
         public static class Keywords implements Serializable {
+            public Keywords(){}
             private Integer id;
 
             private String keyword;
@@ -182,10 +237,10 @@ public class DetailsModel implements Serializable {
 
         }
 
-        public static class More_like_this implements Serializable {
-        }
 
-        public static class Gen implements Serializable {
+
+        public static class Gen  implements Serializable{
+            public Gen(){}
             private String genre;
 
             private Integer id;

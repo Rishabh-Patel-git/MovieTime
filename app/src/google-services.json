@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "493529828400",
+    "project_id": "movietime-15b4c",
+    "storage_bucket": "movietime-15b4c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:493529828400:android:474e18f3a2452113ee71f5",
+        "android_client_info": {
+          "package_name": "com.example.tvtimeclone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "493529828400-f2gup52b3r3spli5r21aie8gjetvmpcn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.tvtimeclone",
+            "certificate_hash": "c90acd919cfc1d15dbed480fe420e3aa1d02f78f"
+          }
+        },
+        {
+          "client_id": "493529828400-0g34vslernera6qoehmp45b31vnerfit.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_0Ez0hMD3ZI_NDcUUcQJlAWHAgt63SAY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "493529828400-0g34vslernera6qoehmp45b31vnerfit.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

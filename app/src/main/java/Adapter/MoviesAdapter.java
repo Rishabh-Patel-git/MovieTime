@@ -22,16 +22,20 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
     Context context;
     List<Results> detailsList;
     itemClickCallback itemClickCallback;
+    addClickCallback clickCallback;
 
-    public MoviesAdapter(Context context, List<Results> movieImageUrlList) {
+
+    public MoviesAdapter(Context context, List<Results> detailsList, itemClickCallback itemClickCallback) {
         this.context = context;
-        this.detailsList = movieImageUrlList;
+        this.detailsList = detailsList;
+        this.itemClickCallback = itemClickCallback;
 
     }
-    public MoviesAdapter(Context context, List<Results> movieImageUrlList, itemClickCallback itemClickCallback) {
+    public MoviesAdapter(Context context, List<Results> detailsList, itemClickCallback itemClickCallback, addClickCallback clickCallback) {
         this.context = context;
-        this.detailsList = movieImageUrlList;
+        this.detailsList = detailsList;
         this.itemClickCallback = itemClickCallback;
+        this.clickCallback = clickCallback;
 
     }
 
@@ -52,6 +56,13 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
             @Override
             public void onClick(View view) {
                 itemClickCallback.onItemClicked(details);
+            }
+        });
+
+        holder.moviesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                clickCallback.onAddButtonClicked(details);
             }
         });
     }
