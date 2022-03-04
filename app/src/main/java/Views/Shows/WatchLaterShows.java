@@ -1,40 +1,55 @@
 package Views.Shows;
 
-import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.Observer;
 
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.tvtimeclone.R;
+import com.example.tvtimeclone.databinding.WatchLaterShowsFragmentBinding;
 
-import ViewModels.WatchLaterShowsViewModel;
+import java.util.List;
+
+import Adapter.DiscoverAdapter;
+import Adapter.itemClickCallback;
+import Models.DetailsModel;
+import ViewModels.ShowsFragmentViewModel;
 
 public class WatchLaterShows extends Fragment {
 
-    private WatchLaterShowsViewModel mViewModel;
-
-    public static WatchLaterShows newInstance() {
-        return new WatchLaterShows();
-    }
-
+    private ShowsFragmentViewModel viewModel;
+    private WatchLaterShowsFragmentBinding binding;
+    private DiscoverAdapter adapter;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.watch_later_shows_fragment, container, false);
+        binding = WatchLaterShowsFragmentBinding.inflate(inflater,container,false);
+        return binding.getRoot();
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(WatchLaterShowsViewModel.class);
-        // TODO: Use the ViewModel
-    }
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        viewModel = new ViewModelProvider(requireActivity()).get(ShowsFragmentViewModel.class);
 
+        viewModel.getWatchLaterShows().observe(getViewLifecycleOwner(), new Observer<List<DetailsModel.Results>>() {
+            @Override
+            public void onChanged(List<DetailsModel.Results> results) {
+                adapter = new DiscoverAdapter(getContext(), results, new itemClickCallback() {
+                    @Override
+                    public void onItemClicked(DetailsModel.Results details) {
+
+                    }
+                });
+                binding.watchLShowsRecycler.setAdapter(adapter);
+            }
+        });
+    }
 }

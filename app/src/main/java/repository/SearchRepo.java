@@ -1,6 +1,8 @@
 package repository;
 
+import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -25,25 +27,22 @@ public class SearchRepo extends DiscoverRepo {
     private MutableLiveData<List<Results>> mutableSearchDetails;
     private MutableLiveData<List<Results>> ShowDetails;
     private ApiService apiServiceA, apiServiceB, apiServiceC, apiServiceD;
-
-    public SearchRepo() {
+    private Context context;
+    public SearchRepo(Context context) {
         apiServiceA = RetrofitInstance.getInstance();
         apiServiceB = RetrofitInstance.getInstance();
         apiServiceC = RetrofitInstance.getInstance();
         apiServiceD = RetrofitInstance.getInstance();
+        this.context = context;
     }
 
     public LiveData<List<Results>> getMovieSearchDetails(String movieName) {
         if (mutableSearchDetails == null) {
             mutableSearchDetails = new MutableLiveData<>();
+
         }
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
-        executorService.execute(new Runnable() {
-            @Override
-            public void run() {
-                loadMovieSearchDetails(movieName);
-            }
-        });
+
+        loadMovieSearchDetails(movieName);
         return mutableSearchDetails;
     }
 
@@ -71,7 +70,7 @@ public class SearchRepo extends DiscoverRepo {
                         getDetailsForShow(response.body().getResults());
                     } else {
                         // progressBar.setVisibility(View.GONE);
-                        // Toast.makeText(getContext(), "Incorrect Movie Name", Toast.LENGTH_SHORT).show();
+                       Toast.makeText(context, "Incorrect show Name", Toast.LENGTH_SHORT).show();
                     }
                 }
 
@@ -82,7 +81,7 @@ public class SearchRepo extends DiscoverRepo {
             });
         } else {
 //            progressBar.setVisibility(View.GONE);
-//            Toast.makeText(getContext(),"Plz enter a movie Name",Toast.LENGTH_SHORT).show();
+           Toast.makeText(context,"Plz enter a show Name",Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -99,7 +98,6 @@ public class SearchRepo extends DiscoverRepo {
                     }
 
                 }
-
                 @Override
                 public void onFailure(Call<DetailsModel> call, Throwable t) {
                 }
@@ -118,18 +116,18 @@ public class SearchRepo extends DiscoverRepo {
 
                     } else {
                         // progressBar.setVisibility(View.GONE);
-                        // Toast.makeText(getContext(), "Incorrect Movie Name", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Incorrect Movie Name", Toast.LENGTH_SHORT).show();
                     }
                 }
 
                 @Override
                 public void onFailure(Call<ImdbIds> call, Throwable t) {
-                    //Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Something went wrong", Toast.LENGTH_SHORT).show();
                 }
             });
         } else {
 //            progressBar.setVisibility(View.GONE);
-//            Toast.makeText(getContext(),"Plz enter a movie Name",Toast.LENGTH_SHORT).show();
+           Toast.makeText(context,"Plz enter a movie Name",Toast.LENGTH_SHORT).show();
         }
     }
 

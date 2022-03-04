@@ -15,23 +15,22 @@ import com.example.tvtimeclone.R;
 
 import java.util.List;
 
-import Models.DetailsModel;
 import Models.DetailsModel.Results;
 
-public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder> {
+public class DiscoverAdapter extends RecyclerView.Adapter<DiscoverAdapter.ViewHolder> {
     Context context;
     List<Results> detailsList;
     itemClickCallback itemClickCallback;
     addClickCallback clickCallback;
 
 
-    public MoviesAdapter(Context context, List<Results> detailsList, itemClickCallback itemClickCallback) {
+    public DiscoverAdapter(Context context, List<Results> detailsList, itemClickCallback itemClickCallback) {
         this.context = context;
         this.detailsList = detailsList;
         this.itemClickCallback = itemClickCallback;
 
     }
-    public MoviesAdapter(Context context, List<Results> detailsList, itemClickCallback itemClickCallback, addClickCallback clickCallback) {
+    public DiscoverAdapter(Context context, List<Results> detailsList, itemClickCallback itemClickCallback, addClickCallback clickCallback) {
         this.context = context;
         this.detailsList = detailsList;
         this.itemClickCallback = itemClickCallback;
@@ -41,14 +40,14 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
 
     @NonNull
     @Override
-    public MoviesAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public DiscoverAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).
                 inflate(R.layout.discover_recycler_view_items, parent, false);
         return new ViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MoviesAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull DiscoverAdapter.ViewHolder holder, int position) {
        Results details = detailsList.get(position);
         Glide.with(context).load(details.getImage_url())
                 .into(holder.moviesImage);

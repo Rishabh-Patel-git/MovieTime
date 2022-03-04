@@ -1,4 +1,4 @@
-package Views;
+package Views.Movies;
 
 import android.os.Bundle;
 

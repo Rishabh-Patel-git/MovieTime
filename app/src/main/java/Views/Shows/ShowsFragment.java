@@ -1,4 +1,4 @@
-package Views;
+package Views.Shows;
 
 import android.os.Bundle;
 

@@ -1,21 +1,23 @@
 package ViewModels;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import java.util.List;
 
 import Models.DetailsModel.Results;
 import repository.DiscoverRepo;
+import repository.FirebaseRepo;
 
 public class DiscoverViewModel extends ViewModel {
     private final DiscoverRepo discoverRepo;
+    private final FirebaseRepo firebaseRepo;
 
-    private MutableLiveData<Results> details = new MutableLiveData<>();
 
     public DiscoverViewModel() {
+
         discoverRepo = new DiscoverRepo();
+        firebaseRepo = new FirebaseRepo();
     }
 
     public LiveData<List<Results>> getMovieUrls() {
@@ -26,11 +28,14 @@ public class DiscoverViewModel extends ViewModel {
         return discoverRepo.getShowUrls();
     }
 
-    public void setItemDetails(Results details1) {
-        details.setValue(details1);
+
+    public void setWatchedLaterMovies(Results movies){
+        firebaseRepo.setWatchLaterMovies(movies);
     }
 
-    public LiveData<Results> getItemDetails(){
-        return details;
+    public void setWatchLaterShows(Results shows){
+        firebaseRepo.setWatchLaterShows(shows);
     }
+
+
 }
