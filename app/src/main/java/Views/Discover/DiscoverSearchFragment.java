@@ -22,6 +22,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.CompoundButton;
 
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.tvtimeclone.R;
 import com.example.tvtimeclone.databinding.FragmentDiscoverSearchBinding;
@@ -120,6 +121,8 @@ public class DiscoverSearchFragment extends Fragment {
                             public void onAddButtonClicked(Results movies) {
 
                                     viewModel.setWatchLaterMovies(movies);
+                                Toast.makeText(getContext(),movies.getTitle()+" added to watch Later",Toast.LENGTH_SHORT).show();
+
                             }
                         });
 
@@ -152,6 +155,8 @@ public class DiscoverSearchFragment extends Fragment {
                     @Override
                     public void onAddButtonClicked(Results movies) {
                         viewModel.setWatchLaterShows(movies);
+                        Toast.makeText(getContext(),movies.getTitle()+" added to watch Later",Toast.LENGTH_SHORT).show();
+
                     }
                 });
                 binding.searchProgress.setVisibility(View.GONE);

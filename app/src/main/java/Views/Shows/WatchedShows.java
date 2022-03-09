@@ -1,32 +1,35 @@
 package Views.Shows;
 
-import androidx.lifecycle.Observer;
-
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.tvtimeclone.databinding.WatchedShowsFragmentBinding;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.List;
-
-import Adapter.DiscoverAdapter;
+import Adapter.FirebaseAdapter;
 import Adapter.itemClickCallback;
 import Models.DetailsModel;
 import Models.DetailsModel.Results;
-import ViewModels.ShowsFragmentViewModel;
+
+import utils.SerializationUtils;
 
 public class WatchedShows extends Fragment {
 
-   private ShowsFragmentViewModel viewModel;
-    private DiscoverAdapter adapter;
+
+    private FirebaseAdapter adapter;
+    private DatabaseReference mbase;
     private WatchedShowsFragmentBinding binding;
 
     @Override
@@ -40,21 +43,32 @@ public class WatchedShows extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        viewModel = new ViewModelProvider(requireActivity()).get(ShowsFragmentViewModel.class);
 
-        viewModel.getWatchedShows().observe(getViewLifecycleOwner(), new Observer<List<DetailsModel.Results>>() {
+        NavController nav = Navigation.findNavController(getParentFragment().getView());
+
+
+        mbase = FirebaseDatabase.getInstance().
+                getReference().child("Users").
+                child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Watched Shows");
+
+        FirebaseRecyclerOptions<Results> options
+                = new FirebaseRecyclerOptions.Builder<DetailsModel.Results>()
+                .setQuery(mbase, DetailsModel.Results.class)
+                .build();
+
+        adapter = new FirebaseAdapter(options, getContext(), new itemClickCallback() {
             @Override
-            public void onChanged(List<Results> results) {
-
-                adapter =new DiscoverAdapter(getContext(), results, new itemClickCallback() {
-                    @Override
-                    public void onItemClicked(Results details) {
-
-                    }
-                });
-                binding.watchedShowRecycler.setAdapter(adapter);
+            public void onItemClicked(DetailsModel.Results details) {
+                details.isShow = true;
+                ShowsFragmentDirections.ActionShowsFragmentToDetailsFragment action
+                        = ShowsFragmentDirections.actionShowsFragmentToDetailsFragment(SerializationUtils.convertToByteString(details));
+                 nav.navigate(action);
             }
-        });
+        }, mbase,binding.progressBar);
+
+        binding.watchedShowRecycler.setVisibility(View.VISIBLE);
+        binding.watchedShowRecycler.setAdapter(adapter);
+        adapter.startListening();
 
     }
 }

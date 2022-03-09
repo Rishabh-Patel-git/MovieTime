@@ -22,14 +22,14 @@ public class DiscoverAdapter extends RecyclerView.Adapter<DiscoverAdapter.ViewHo
     List<Results> detailsList;
     itemClickCallback itemClickCallback;
     addClickCallback clickCallback;
-
-
     public DiscoverAdapter(Context context, List<Results> detailsList, itemClickCallback itemClickCallback) {
         this.context = context;
         this.detailsList = detailsList;
         this.itemClickCallback = itemClickCallback;
 
+
     }
+
     public DiscoverAdapter(Context context, List<Results> detailsList, itemClickCallback itemClickCallback, addClickCallback clickCallback) {
         this.context = context;
         this.detailsList = detailsList;

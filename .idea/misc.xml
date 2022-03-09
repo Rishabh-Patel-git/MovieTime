@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/TvTimeClone/app/src/main/res/drawable/ic_baseline_add_box_24.xml" value="0.19166666666666668" />
+        <entry key="..\:/TvTimeClone/app/src/main/res/drawable/ic_baseline_remove_24.xml" value="0.19166666666666668" />
         <entry key="..\:/TvTimeClone/app/src/main/res/layout/activity_main.xml" value="0.17552083333333332" />
         <entry key="..\:/TvTimeClone/app/src/main/res/layout/discover_recycler_view_items.xml" value="0.17552083333333332" />
         <entry key="..\:/TvTimeClone/app/src/main/res/layout/fragment_details.xml" value="0.17552083333333332" />

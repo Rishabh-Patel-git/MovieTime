@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
 import utils.SerializationUtils;
 
 
@@ -72,6 +74,7 @@ public class DiscoverFragment extends Fragment  {
                     @Override
                     public void onAddButtonClicked(DetailsModel.Results movies) {
                        viewModel.setWatchedLaterMovies(movies);
+                        Toast.makeText(getContext(),movies.getTitle()+" added to watch Later",Toast.LENGTH_SHORT).show();
                     }
                 });
                 binding.discoverMoviesRecyclerView.setHasFixedSize(true);
@@ -99,6 +102,8 @@ public class DiscoverFragment extends Fragment  {
                     @Override
                     public void onAddButtonClicked(DetailsModel.Results movies) {
                        viewModel.setWatchLaterShows(movies);
+                        Toast.makeText(getContext(),movies.getTitle()+" added to watch Later",Toast.LENGTH_SHORT).show();
+
                     }
                 });
                 binding.progressBar1.setVisibility(View.GONE);

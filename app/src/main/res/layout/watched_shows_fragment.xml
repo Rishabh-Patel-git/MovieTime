@@ -7,11 +7,17 @@
     tools:context="Views.Movies.WatchLaterMoviesFragment">
 
 
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:id="@+id/progress_bar"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/watchedShow_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="5dp"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:spanCount="3"/>
 

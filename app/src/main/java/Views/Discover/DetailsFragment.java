@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -68,6 +69,8 @@ public class DetailsFragment extends Fragment {
                 } else {
                     viewModel.setWatchedMovies(navDetails);
                 }
+                Toast.makeText(getContext(),navDetails.getTitle()+" added to Watched List",Toast.LENGTH_SHORT).show();
+
             }
         });
     }
