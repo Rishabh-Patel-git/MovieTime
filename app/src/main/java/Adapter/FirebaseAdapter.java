@@ -1,13 +1,11 @@
 package Adapter;
 
 import android.content.Context;
-import android.content.pm.LabeledIntent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,8 +17,6 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 
-import java.util.List;
-
 import Models.DetailsModel;
 
 
@@ -28,27 +24,26 @@ public class FirebaseAdapter extends FirebaseRecyclerAdapter<DetailsModel.Result
 
     Context context;
     itemClickCallback itemClickCallback;
-    ProgressBar progressBar;
     DatabaseReference mbase;
+    EmptyCallback emptyCallback;
+
 
 
     public FirebaseAdapter(@NonNull FirebaseRecyclerOptions<DetailsModel.Results> options,
                            Context context,
-                           itemClickCallback itemClickCallback, DatabaseReference mbase, ProgressBar progressBar) {
+                           itemClickCallback itemClickCallback, DatabaseReference mbase, EmptyCallback emptyCallback) {
         super(options);
         this.context = context;
         this.itemClickCallback = itemClickCallback;
-        this.progressBar = progressBar;
+        this.emptyCallback = emptyCallback;
         this.mbase = mbase;
     }
 
     @Override
     public void onDataChanged() {
         super.onDataChanged();
-//        if (getItemCount() == 0) {
-//           // Toast.makeText(context, "add some movies ", Toast.LENGTH_SHORT).show();
-//        }
-        progressBar.setVisibility(View.GONE);
+        emptyCallback.onEmptyCall(getItemCount());
+
     }
 
     @Override

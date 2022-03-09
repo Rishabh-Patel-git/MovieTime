@@ -71,7 +71,9 @@ public class DiscoverSearchFragment extends Fragment {
             public void onCheckedChanged(CompoundButton compoundButton, boolean show) {
                 if (show) {
                     isShow = true;
+
                 }
+                searchAdapter.notifyDataSetChanged();
 
             }
         });
@@ -81,6 +83,7 @@ public class DiscoverSearchFragment extends Fragment {
                 if (i == EditorInfo.IME_ACTION_SEARCH) {
                     if (isShow) {
                         getShows();
+
                     } else {
                         getMovies();
 

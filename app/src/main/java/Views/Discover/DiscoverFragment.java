@@ -6,9 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import utils.SerializationUtils;
-
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -28,6 +25,7 @@ import Adapter.itemClickCallback;
 import Models.DetailsModel;
 import Models.DetailsModel.Results;
 import ViewModels.DiscoverViewModel;
+import utils.SerializationUtils;
 
 public class DiscoverFragment extends Fragment  {
 

@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import Adapter.EmptyCallback;
 import Adapter.FirebaseAdapter;
 import Adapter.itemClickCallback;
 import Models.DetailsModel.Results;
@@ -63,7 +64,14 @@ public class WatchLaterMoviesFragment extends Fragment {
                         MoviesFragmentDirections.actionMoviesFragmentToDetailsFragment(SerializationUtils.convertToByteString(details));
                 nav.navigate(action);
             }
-        }, mbase,binding.progressBar);
+        }, mbase, new EmptyCallback() {
+            @Override
+            public void onEmptyCall(int itemCount) {
+                binding.progressBar.setVisibility(View.GONE);
+                binding.noItemImage.setVisibility(itemCount == 0 ? View.VISIBLE : View.GONE);
+                binding.noItemText.setVisibility(itemCount == 0 ? View.VISIBLE : View.GONE);
+            }
+        });
 
 
         binding.watchLaterRecyclerView.setVisibility(View.VISIBLE);

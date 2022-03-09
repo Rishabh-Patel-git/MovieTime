@@ -15,7 +15,6 @@ import java.util.concurrent.Executors;
 import Models.DetailsModel;
 import Models.DetailsModel.Results;
 import Models.ImdbIds;
-
 import Network.ApiService;
 import Network.RetrofitInstance;
 import retrofit2.Call;

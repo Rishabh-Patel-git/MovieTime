@@ -9,9 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Models.DetailsModel;
-
-import Models.ImdbIds;
 import Models.DetailsModel.Results;
+import Models.ImdbIds;
 import Network.ApiService;
 import Network.RetrofitInstance;
 import retrofit2.Call;

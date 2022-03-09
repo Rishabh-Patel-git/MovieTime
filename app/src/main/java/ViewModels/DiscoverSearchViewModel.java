@@ -3,13 +3,11 @@ package ViewModels;
 import android.content.Context;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import java.util.List;
 
 import Models.DetailsModel.Results;
-import repository.DiscoverRepo;
 import repository.FirebaseRepo;
 import repository.SearchRepo;
 

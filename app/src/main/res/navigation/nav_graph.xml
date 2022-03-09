@@ -31,7 +31,10 @@
         tools:layout="@layout/fragment_discover" >
         <action
             android:id="@+id/action_discoverFragment_to_discoverSearchFragment"
-            app:destination="@id/discoverSearchFragment" />
+            app:destination="@id/discoverSearchFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/discoverFragment"
+            app:popUpToInclusive="false" />
         <action
             android:id="@+id/action_discoverFragment_to_detailsFragment"
             app:destination="@id/detailsFragment" />
@@ -51,7 +54,10 @@
             app:destination="@id/discoverFragment" />
         <action
             android:id="@+id/action_discoverSearchFragment_to_detailsFragment"
-            app:destination="@id/detailsFragment" />
+            app:destination="@id/detailsFragment"
+            app:launchSingleTop="false"
+            app:popUpTo="@id/discoverSearchFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"

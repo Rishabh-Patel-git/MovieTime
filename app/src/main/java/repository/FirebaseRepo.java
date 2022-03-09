@@ -1,11 +1,10 @@
 package repository;
 
-import androidx.lifecycle.MutableLiveData;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import java.util.List;
+
 import Models.DetailsModel.Results;
 
 public class FirebaseRepo {

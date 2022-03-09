@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:fontFamily="sans-serif-medium"
-        android:text="Tv Time Clone"
+        android:text="MovieTime"
        android:textStyle="bold"
         android:textColor="@color/white_shade"
         android:textSize="35dp"

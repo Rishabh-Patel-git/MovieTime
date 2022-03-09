@@ -2,29 +2,24 @@ package Views.Discover;
 
 
 import android.os.Bundle;
-
-import ViewModels.DetailsViewModel;
-import utils.SerializationUtils;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import androidx.fragment.app.Fragment;
-
-import androidx.lifecycle.ViewModelProvider;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
+import com.bumptech.glide.Glide;
 import com.example.tvtimeclone.databinding.FragmentDetailsBinding;
 
 import java.io.IOException;
 
 import Models.DetailsModel.Results;
+import ViewModels.DetailsViewModel;
+import utils.SerializationUtils;
 
 
 public class DetailsFragment extends Fragment {

@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import Adapter.EmptyCallback;
 import Adapter.FirebaseAdapter;
 import Adapter.itemClickCallback;
 import Models.DetailsModel;
@@ -62,9 +63,16 @@ public class WatchedShows extends Fragment {
                 details.isShow = true;
                 ShowsFragmentDirections.ActionShowsFragmentToDetailsFragment action
                         = ShowsFragmentDirections.actionShowsFragmentToDetailsFragment(SerializationUtils.convertToByteString(details));
-                 nav.navigate(action);
+                nav.navigate(action);
             }
-        }, mbase,binding.progressBar);
+        }, mbase, new EmptyCallback() {
+            @Override
+            public void onEmptyCall(int itemCount) {
+                binding.progressBar.setVisibility(View.GONE);
+                binding.noItemImage.setVisibility(itemCount == 0 ? View.VISIBLE : View.GONE);
+                binding.noItemText.setVisibility(itemCount == 0 ? View.VISIBLE : View.GONE);
+            }
+        });
 
         binding.watchedShowRecycler.setVisibility(View.VISIBLE);
         binding.watchedShowRecycler.setAdapter(adapter);

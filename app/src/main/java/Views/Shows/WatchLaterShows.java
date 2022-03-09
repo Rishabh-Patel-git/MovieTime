@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import Adapter.EmptyCallback;
 import Adapter.FirebaseAdapter;
 import Adapter.itemClickCallback;
 import Models.DetailsModel;
@@ -28,10 +29,11 @@ public class WatchLaterShows extends Fragment {
     private WatchLaterShowsFragmentBinding binding;
     private FirebaseAdapter adapter;
     private DatabaseReference mbase;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        binding = WatchLaterShowsFragmentBinding.inflate(inflater,container,false);
+        binding = WatchLaterShowsFragmentBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
@@ -58,7 +60,14 @@ public class WatchLaterShows extends Fragment {
                         = ShowsFragmentDirections.actionShowsFragmentToDetailsFragment(SerializationUtils.convertToByteString(details));
                 nav.navigate(action);
             }
-        }, mbase, binding.progressBar);
+        }, mbase, new EmptyCallback() {
+            @Override
+            public void onEmptyCall(int itemCount) {
+                binding.progressBar.setVisibility(View.GONE);
+                binding.noItemImage.setVisibility(itemCount == 0 ? View.VISIBLE : View.GONE);
+                binding.noItemText.setVisibility(itemCount == 0 ? View.VISIBLE : View.GONE);
+            }
+        });
 
 
         binding.watchLShowsRecycler.setVisibility(View.VISIBLE);
